@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ SPDX-FileCopyrightText: 2026 Yu Junyang (https://github.com/lowkeyfish)
+  ~ SPDX-License-Identifier: MIT
+  -->
+
 <Configuration status="WARN">
   <Properties>
     <Property name="logPath">${sys:log.path:-./logs}</Property>

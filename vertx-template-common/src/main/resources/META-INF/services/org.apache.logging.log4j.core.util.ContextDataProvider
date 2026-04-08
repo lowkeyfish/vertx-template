@@ -1,2 +1,7 @@
+#
+# SPDX-FileCopyrightText: 2026 Yu Junyang (https://github.com/lowkeyfish)
+# SPDX-License-Identifier: MIT
+#
+
 io.reactiverse.contextual.logging.log4j.impl.VertxContextDataProvider
 io.opentelemetry.instrumentation.log4j.contextdata.v2_17.OpenTelemetryContextDataProvider
