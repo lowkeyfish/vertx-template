@@ -1,0 +1,12 @@
+vertx:
+  deploymentInstances: 2
+server:
+  port: 6060
+
+otel:
+  server:
+    port:
+      http: 4318
+      grpc: 4317
+
+test: 123

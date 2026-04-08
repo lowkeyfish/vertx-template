@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.yujunyang.vertxtemplate</groupId>
+  <artifactId>vertx-template</artifactId>
+  <version>0.1.0</version>
+  <packaging>pom</packaging>
+  <name>vertx-template</name>
+  <modules>
+    <module>vertx-template-common</module>
+    <module>vertx-template-api</module>
+  </modules>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
+    <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+    <maven-shade-plugin.version>3.2.4</maven-shade-plugin.version>
+    <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+    <exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
+    <native-maven-plugin.version>0.11.4</native-maven-plugin.version>
+
+    <vertx.version>5.0.10</vertx.version>
+    <junit-jupiter.version>5.9.1</junit-jupiter.version>
+    <log4j.versoin>2.25.3</log4j.versoin>
+    <apache.commons.lang3.version>3.20.0</apache.commons.lang3.version>
+    <google.guava.version>33.5.0-jre</google.guava.version>
+    <yitter-idgenerator.version>1.0.6</yitter-idgenerator.version>
+    <opentelemetry.version>1.46.0</opentelemetry.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.yujunyang.vertxtemplate</groupId>
+        <artifactId>vertx-template-common</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-bom</artifactId>
+        <version>${log4j.versoin}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.lmax</groupId>
+        <artifactId>disruptor</artifactId>
+        <version>4.0.0</version>
+      </dependency>
+      <dependency>
+        <groupId>io.reactiverse</groupId>
+        <artifactId>reactiverse-contextual-logging-log4j2</artifactId>
+        <version>2.0.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-stack-depchain</artifactId>
+        <version>${vertx.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${apache.commons.lang3.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${google.guava.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.github.yitter</groupId>
+        <artifactId>yitter-idgenerator</artifactId>
+        <version>${yitter-idgenerator.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>io.opentelemetry.proto</groupId>
+        <artifactId>opentelemetry-proto</artifactId>
+        <version>1.10.0-alpha</version>
+      </dependency>
+      <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-bom</artifactId>
+        <version>${opentelemetry.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.opentelemetry.semconv</groupId>
+        <artifactId>opentelemetry-semconv</artifactId>
+        <version>1.40.0</version>
+      </dependency>
+      <dependency>
+        <groupId>io.opentelemetry.instrumentation</groupId>
+        <artifactId>opentelemetry-log4j-context-data-2.17-autoconfigure</artifactId>
+        <version>2.12.0-alpha</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <java>
+            <palantirJavaFormat>
+              <formatJavadoc>true</formatJavadoc>
+            </palantirJavaFormat>
+          </java>
+          <pom>
+            <sortPom>
+              <nrOfIndentSpace>2</nrOfIndentSpace>
+            </sortPom>
+          </pom>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

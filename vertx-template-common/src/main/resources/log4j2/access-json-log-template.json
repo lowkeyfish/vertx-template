@@ -1,0 +1,11 @@
+{
+  "timestamp": {
+    "$resolver": "timestamp",
+    "pattern": "yyyy-MM-dd'T'HH:mm:ss.SSSX"
+  },
+  "traceId": "${ctx:trace_id:-}",
+  "spanId": "${ctx:span_id:-}",
+  "data": {
+    "$resolver": "message"
+  }
+}

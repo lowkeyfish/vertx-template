@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Properties>
+    <Property name="logPath">${sys:log.path:-./logs}</Property>
+    <Property name="project">vertx-template</Property>
+  </Properties>
+  <Appenders>
+    <Console name="console">
+      <JsonTemplateLayout eventTemplateUri="classpath:log4j2/json-log-template.json"></JsonTemplateLayout>
+    </Console>
+    <RollingFile name="errorFile"
+      fileName="${logPath}/${project}-error.jsonl"
+      filePattern="${logPath}/${project}-error-%d{yyyy-MM-dd}-%i.jsonl.gz">
+      <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+      <JsonTemplateLayout eventTemplateUri="classpath:log4j2/json-log-template.json"></JsonTemplateLayout>
+      <Policies>
+        <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+        <SizeBasedTriggeringPolicy size="50 MB"/>
+      </Policies>
+    </RollingFile>
+    <RollingFile name="runFile"
+      fileName="${logPath}/${project}-run.jsonl"
+      filePattern="${logPath}/${project}-run-%d{yyyy-MM-dd}-%i.jsonl.gz">
+      <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="ACCEPT"/>
+      <JsonTemplateLayout eventTemplateUri="classpath:log4j2/json-log-template.json"></JsonTemplateLayout>
+      <Policies>
+        <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+        <SizeBasedTriggeringPolicy size="50 MB"/>
+      </Policies>
+    </RollingFile>
+
+  </Appenders>
+  <Loggers>
+    <AsyncRoot level="WARN">
+      <AppenderRef ref="errorFile"/>
+      <AppenderRef ref="runFile"/>
+    </AsyncRoot>
+  </Loggers>
+</Configuration>

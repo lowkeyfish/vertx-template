@@ -1,0 +1,17 @@
+package com.yujunyang.vertx.template.api.web.router;
+
+import com.yujunyang.vertx.template.common.vertx.RoutingContextUtils;
+import io.vertx.ext.web.Router;
+import io.vertx.ext.web.handler.BodyHandler;
+
+public class OtelHttpServerRouter {
+    public void appendTo(Router router) {
+        router.route().handler(BodyHandler.create());
+
+        router.get("/").handler(routingContext -> {
+            RoutingContextUtils.response(routingContext, "welcome to sparrow otel http");
+        });
+
+        router.get("/health").handler(routingContext -> RoutingContextUtils.response(routingContext, "ok"));
+    }
+}
