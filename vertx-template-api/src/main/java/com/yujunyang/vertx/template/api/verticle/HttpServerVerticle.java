@@ -5,7 +5,8 @@
 
 package com.yujunyang.vertx.template.api.verticle;
 
-import com.yujunyang.vertx.template.api.web.router.TestRouter;
+import com.yujunyang.vertx.template.api.web.router.GraphQLRouter;
+import com.yujunyang.vertx.template.api.web.router.HealthRouter;
 import com.yujunyang.vertx.template.common.log4j2.DataMessage;
 import com.yujunyang.vertx.template.common.vertx.config.ApplicationConfigManager;
 import com.yujunyang.vertx.template.common.vertx.router.AllRouter;
@@ -16,17 +17,18 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class MainVerticle extends VerticleBase {
-    private static final Logger LOGGER = LogManager.getLogger(MainVerticle.class);
+public class HttpServerVerticle extends VerticleBase {
+    private static final Logger LOGGER = LogManager.getLogger(HttpServerVerticle.class);
 
     @Override
     public Future<?> start() {
         Router router = Router.router(vertx);
         new AllRouter().appendTo(router);
-        new TestRouter().appendTo(router);
+        new HealthRouter().appendTo(router);
+        new GraphQLRouter().appendTo(vertx, router);
         int port = ApplicationConfigManager.get().getServer().getPort();
         return vertx.createHttpServer().requestHandler(router).listen(port).onSuccess(http -> {
-            LOGGER.info(DataMessage.of("Sparrow Http Server启动成功", Map.of("port", port)));
+            LOGGER.info(DataMessage.of("Http Server启动成功", Map.of("port", port)));
         });
     }
 }

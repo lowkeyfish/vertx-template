@@ -27,7 +27,7 @@ public class OtelHttpServerVerticle extends VerticleBase {
         ApplicationConfig applicationConfig = ApplicationConfigManager.get();
         int port = applicationConfig.getOtel().getServer().getPort().getHttp();
         return vertx.createHttpServer().requestHandler(router).listen(port).onSuccess(http -> {
-            LOGGER.info(DataMessage.of("Sparrow OTel Http Server启动成功", Map.of("port", port)));
+            LOGGER.info(DataMessage.of("OTel Http Server启动成功", Map.of("port", port)));
         });
     }
 }

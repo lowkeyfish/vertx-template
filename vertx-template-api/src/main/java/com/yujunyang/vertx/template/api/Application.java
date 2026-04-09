@@ -6,7 +6,7 @@
 package com.yujunyang.vertx.template.api;
 
 import com.yujunyang.vertx.template.api.config.ApplicationConfig;
-import com.yujunyang.vertx.template.api.verticle.MainVerticle;
+import com.yujunyang.vertx.template.api.verticle.HttpServerVerticle;
 import com.yujunyang.vertx.template.api.verticle.OtelHttpServerVerticle;
 import com.yujunyang.vertx.template.common.launch.ApplicationLauncher;
 import com.yujunyang.vertx.template.common.vertx.config.ApplicationConfigManager;
@@ -55,7 +55,7 @@ public class Application {
                         DeploymentOptions deploymentOptions = new DeploymentOptions()
                                 .setInstances(applicationConfig.getVertx().getDeploymentInstance());
 
-                        return vertx.deployVerticle(MainVerticle.class, deploymentOptions)
+                        return vertx.deployVerticle(HttpServerVerticle.class, deploymentOptions)
                                 .compose(r -> vertx.deployVerticle(OtelHttpServerVerticle.class, deploymentOptions))
                                 .onSuccess(r -> System.out.println("Verticle全部部署成功"));
                     })

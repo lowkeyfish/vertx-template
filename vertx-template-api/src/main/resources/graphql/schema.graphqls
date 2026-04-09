@@ -1,0 +1,14 @@
+scalar DateTime
+scalar BigDecimal
+scalar Long
+scalar ID
+scalar String
+scalar Int
+scalar Boolean
+
+directive @dateTimeFormat(format: String) on FIELD_DEFINITION
+
+schema {
+    query: Query
+    # mutation: Mutation
+}
