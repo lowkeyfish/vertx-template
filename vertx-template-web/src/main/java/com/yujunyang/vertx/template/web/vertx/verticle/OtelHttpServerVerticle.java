@@ -5,10 +5,10 @@
 
 package com.yujunyang.vertx.template.web.vertx.verticle;
 
-import com.yujunyang.vertx.template.web.config.ApplicationConfig;
-import com.yujunyang.vertx.template.web.vertx.router.OtelHttpServerRouter;
 import com.yujunyang.vertx.template.common.log4j2.DataMessage;
 import com.yujunyang.vertx.template.common.vertx.config.ApplicationConfigManager;
+import com.yujunyang.vertx.template.web.config.ApplicationConfig;
+import com.yujunyang.vertx.template.web.vertx.router.OtelHttpServerRouter;
 import io.vertx.core.Future;
 import io.vertx.core.VerticleBase;
 import io.vertx.ext.web.Router;
@@ -17,6 +17,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class OtelHttpServerVerticle extends VerticleBase {
+
     private static final Logger LOGGER = LogManager.getLogger(OtelHttpServerVerticle.class);
 
     @Override

@@ -5,11 +5,11 @@
 
 package com.yujunyang.vertx.template.web;
 
+import com.yujunyang.vertx.template.common.launch.ApplicationLauncher;
+import com.yujunyang.vertx.template.common.vertx.config.ApplicationConfigManager;
 import com.yujunyang.vertx.template.web.config.ApplicationConfig;
 import com.yujunyang.vertx.template.web.vertx.verticle.HttpServerVerticle;
 import com.yujunyang.vertx.template.web.vertx.verticle.OtelHttpServerVerticle;
-import com.yujunyang.vertx.template.common.launch.ApplicationLauncher;
-import com.yujunyang.vertx.template.common.vertx.config.ApplicationConfigManager;
 import io.opentelemetry.api.OpenTelemetry;
 import io.opentelemetry.api.common.Attributes;
 import io.opentelemetry.api.trace.propagation.W3CTraceContextPropagator;
