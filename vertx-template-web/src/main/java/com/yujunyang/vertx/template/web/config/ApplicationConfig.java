@@ -11,14 +11,14 @@ import com.yujunyang.vertx.template.common.vertx.config.DefaultApplicationConfig
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApplicationConfig extends DefaultApplicationConfig {
-    @JsonProperty("otel")
-    private OtelConfig otel;
+    @JsonProperty("test")
+    private int test;
 
-    public OtelConfig getOtel() {
-        return otel;
+    public int getTest() {
+        return test;
     }
 
-    public void setOtel(OtelConfig otel) {
-        this.otel = otel;
+    public void setTest(int test) {
+        this.test = test;
     }
 }

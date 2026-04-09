@@ -5,6 +5,8 @@
 
 package com.yujunyang.vertx.template.common.launch;
 
+import com.github.yitter.contract.IdGeneratorOptions;
+import com.github.yitter.idgen.YitIdHelper;
 import com.yujunyang.vertx.template.common.environment.EnvironmentType;
 import com.yujunyang.vertx.template.common.environment.EnvironmentUtils;
 import com.yujunyang.vertx.template.common.log4j2.Log4j2Configurator;
@@ -35,9 +37,15 @@ public final class ApplicationLauncher {
         CheckUtils.notNull(applicationConfigClass, "applicationConfigClass不能为null");
         CheckUtils.notNull(deployVerticleHandler, "deployVerticleHandler不能为null");
 
+        initializeIdGenerator();
         initializeLog4j2Config(environmentType);
         initializeApplicationConfig(environmentType, vertx, applicationConfigClass);
         return deployVerticleHandler.apply(vertx);
+    }
+
+    private static void initializeIdGenerator() {
+        IdGeneratorOptions options = new IdGeneratorOptions((short) 1);
+        YitIdHelper.setIdGenerator(options);
     }
 
     private static void initializeLog4j2Config(EnvironmentType environmentType) {
