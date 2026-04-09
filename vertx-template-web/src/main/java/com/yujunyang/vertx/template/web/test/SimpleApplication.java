@@ -5,10 +5,10 @@
 
 package com.yujunyang.vertx.template.web.test;
 
-import com.yujunyang.vertx.template.web.config.ApplicationConfig;
-import com.yujunyang.vertx.template.web.vertx.verticle.HttpServerVerticle;
 import com.yujunyang.vertx.template.common.launch.ApplicationLauncher;
 import com.yujunyang.vertx.template.common.vertx.config.ApplicationConfigManager;
+import com.yujunyang.vertx.template.web.config.ApplicationConfig;
+import com.yujunyang.vertx.template.web.vertx.verticle.HttpServerVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 
