@@ -3,10 +3,10 @@
  * SPDX-License-Identifier: MIT
  */
 
-package com.yujunyang.vertx.template.api.verticle;
+package com.yujunyang.vertx.template.web.vertx.verticle;
 
-import com.yujunyang.vertx.template.api.config.ApplicationConfig;
-import com.yujunyang.vertx.template.api.web.router.OtelHttpServerRouter;
+import com.yujunyang.vertx.template.web.config.ApplicationConfig;
+import com.yujunyang.vertx.template.web.vertx.router.OtelHttpServerRouter;
 import com.yujunyang.vertx.template.common.log4j2.DataMessage;
 import com.yujunyang.vertx.template.common.vertx.config.ApplicationConfigManager;
 import io.vertx.core.Future;

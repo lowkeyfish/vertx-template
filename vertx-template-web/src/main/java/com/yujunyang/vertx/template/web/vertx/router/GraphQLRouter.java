@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: MIT
  */
 
-package com.yujunyang.vertx.template.api.web.router;
+package com.yujunyang.vertx.template.web.vertx.router;
 
 import graphql.GraphQL;
 import io.vertx.core.Vertx;

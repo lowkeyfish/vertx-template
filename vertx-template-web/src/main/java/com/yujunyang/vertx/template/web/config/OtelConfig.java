@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: MIT
  */
 
-package com.yujunyang.vertx.template.api.config;
+package com.yujunyang.vertx.template.web.config;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -12,7 +12,7 @@
   <name>vertx-template</name>
   <modules>
     <module>vertx-template-common</module>
-    <module>vertx-template-api</module>
+    <module>vertx-template-web</module>
   </modules>
 
   <properties>

@@ -10,12 +10,12 @@
     <artifactId>vertx-template</artifactId>
     <version>0.1.0</version>
   </parent>
-  <artifactId>vertx-template-api</artifactId>
-  <name>vertx-template-api</name>
+  <artifactId>vertx-template-web</artifactId>
+  <name>vertx-template-web</name>
 
   <properties>
     <!--    <launcher.class>io.vertx.launcher.application.VertxApplication</launcher.class>-->
-    <launcher.class>com.yujunyang.vertx.template.api.Application</launcher.class>
+    <launcher.class>com.yujunyang.vertx.template.web.Application</launcher.class>
     <main.verticle/>
   </properties>
 

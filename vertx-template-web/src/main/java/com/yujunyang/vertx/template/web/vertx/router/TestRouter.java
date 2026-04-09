@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: MIT
  */
 
-package com.yujunyang.vertx.template.api.web.router;
+package com.yujunyang.vertx.template.web.vertx.router;
 
 import com.yujunyang.vertx.template.common.utils.OtelUtils;
 import com.yujunyang.vertx.template.common.vertx.RoutingContextUtils;

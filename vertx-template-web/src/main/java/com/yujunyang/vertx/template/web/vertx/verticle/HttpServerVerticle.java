@@ -3,10 +3,10 @@
  * SPDX-License-Identifier: MIT
  */
 
-package com.yujunyang.vertx.template.api.verticle;
+package com.yujunyang.vertx.template.web.vertx.verticle;
 
-import com.yujunyang.vertx.template.api.web.router.GraphQLRouter;
-import com.yujunyang.vertx.template.api.web.router.HealthRouter;
+import com.yujunyang.vertx.template.web.vertx.router.GraphQLRouter;
+import com.yujunyang.vertx.template.web.vertx.router.HealthRouter;
 import com.yujunyang.vertx.template.common.log4j2.DataMessage;
 import com.yujunyang.vertx.template.common.vertx.config.ApplicationConfigManager;
 import com.yujunyang.vertx.template.common.vertx.router.AllRouter;
