@@ -10,43 +10,51 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BusinessRuleException extends RuntimeException {
+public class AppException extends RuntimeException {
     private int httpStausCode = 400;
-    private String code = "ERROR";
+    private ExceptionCodeType code = ExceptionCodeType.BAD_REQUEST;
     private Map<String, Object> details = new HashMap<>();
 
-    public BusinessRuleException(String message) {
+    public AppException(String message) {
         super(message);
     }
 
-    public BusinessRuleException(String message, Map<String, Object> details) {
+    public AppException(String message, Map<String, Object> details) {
         super(message);
         this.details = details;
     }
 
-    public BusinessRuleException(String message, String code) {
+    public AppException(String message, ExceptionCodeType code) {
         super(message);
         this.code = code;
     }
 
-    public BusinessRuleException(String message, String code, Map<String, Object> details) {
+    public AppException(String message, ExceptionCodeType code, Map<String, Object> details) {
         super(message);
         this.code = code;
         this.details = details;
     }
 
-    public BusinessRuleException(Throwable cause) {
+    public AppException(Throwable cause) {
         super(cause);
     }
 
-    public BusinessRuleException(
-            String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace, String code) {
+    public AppException(
+            String message,
+            Throwable cause,
+            boolean enableSuppression,
+            boolean writableStackTrace,
+            ExceptionCodeType code) {
         super(message, cause, enableSuppression, writableStackTrace);
         this.code = code;
     }
 
-    public String getCode() {
+    public ExceptionCodeType getCode() {
         return code;
+    }
+
+    public String getCodeText() {
+        return code.name();
     }
 
     public Map<String, Object> getDetails() {
@@ -60,10 +68,10 @@ public class BusinessRuleException extends RuntimeException {
     public String detailedMessage() {
         return MessageFormat.format(
                 "code({0}),message({1}),details({2}),httpStatusCode({3})",
-                code, super.getMessage(), JacksonUtils.serialize(getDetails()), httpStausCode);
+                code.name(), super.getMessage(), JacksonUtils.serialize(getDetails()), httpStausCode);
     }
 
-    public BusinessRuleException changeStatusCode(int httpStausCode) {
+    public AppException changeStatusCode(int httpStausCode) {
         this.httpStausCode = httpStausCode;
         return this;
     }
