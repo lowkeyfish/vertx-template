@@ -32,6 +32,7 @@
     <google.guava.version>33.5.0-jre</google.guava.version>
     <yitter-idgenerator.version>1.0.6</yitter-idgenerator.version>
     <opentelemetry.version>1.46.0</opentelemetry.version>
+    <password4j.version>1.8.4</password4j.version>
   </properties>
 
   <dependencyManagement>
@@ -78,11 +79,15 @@
         <artifactId>guava</artifactId>
         <version>${google.guava.version}</version>
       </dependency>
-
       <dependency>
         <groupId>com.github.yitter</groupId>
         <artifactId>yitter-idgenerator</artifactId>
         <version>${yitter-idgenerator.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.password4j</groupId>
+        <artifactId>password4j</artifactId>
+        <version>${password4j.version}</version>
       </dependency>
 
       <dependency>

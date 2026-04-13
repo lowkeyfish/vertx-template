@@ -47,20 +47,18 @@ public final class CheckUtils {
         }
     }
 
-    public static void notBlank(String string, String errorMessagePattern, Object... errorMessageArgs) {
-        notBlank(string, new IllegalArgumentException(MessageFormat.format(errorMessagePattern, errorMessageArgs)));
+    public static void notBlank(CharSequence input, String errorMessagePattern, Object... errorMessageArgs) {
+        notBlank(input, new IllegalArgumentException(MessageFormat.format(errorMessagePattern, errorMessageArgs)));
     }
 
-    public static <E extends RuntimeException> void notBlank(String string, E exception) {
-        notNull(string, exception);
-        if (StringUtils.isBlank(string)) {
+    public static <E extends RuntimeException> void notBlank(CharSequence input, E exception) {
+        if (StringUtils.isBlank(input)) {
             throw exception;
         }
     }
 
-    public static <E extends Exception> void notBlank(String string, E exception) throws E {
-        notNull(string, exception);
-        if (StringUtils.isBlank(string)) {
+    public static <E extends Exception> void notBlank(CharSequence input, E exception) throws E {
+        if (StringUtils.isBlank(input)) {
             throw exception;
         }
     }
@@ -69,9 +67,9 @@ public final class CheckUtils {
         anyNotBlank(strings, new IllegalArgumentException(MessageFormat.format(errorMessagePattern, errorMessageArgs)));
     }
 
-    public static <E extends RuntimeException> void anyNotBlank(String[] strings, E exception) {
+    public static <E extends RuntimeException> void anyNotBlank(CharSequence[] strings, E exception) {
         boolean allBlank = true;
-        for (String string : strings) {
+        for (CharSequence string : strings) {
             if (StringUtils.isNotBlank(string)) {
                 allBlank = false;
                 break;
@@ -82,9 +80,9 @@ public final class CheckUtils {
         }
     }
 
-    public static <E extends Exception> void anyNotBlank(String[] strings, E exception) throws E {
+    public static <E extends Exception> void anyNotBlank(CharSequence[] strings, E exception) throws E {
         boolean allBlank = true;
-        for (String string : strings) {
+        for (CharSequence string : strings) {
             if (StringUtils.isNotBlank(string)) {
                 allBlank = false;
                 break;

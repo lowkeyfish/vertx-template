@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BusinessRuleException extends RuntimeException {
+    private int httpStausCode = 400;
     private String code = "ERROR";
     private Map<String, Object> details = new HashMap<>();
 
@@ -52,8 +53,18 @@ public class BusinessRuleException extends RuntimeException {
         return details;
     }
 
+    public int getHttpStausCode() {
+        return httpStausCode;
+    }
+
     public String detailedMessage() {
         return MessageFormat.format(
-                "code({0}),message({1}),,details({2})", code, super.getMessage(), JacksonUtils.serialize(getDetails()));
+                "code({0}),message({1}),details({2}),httpStatusCode({3})",
+                code, super.getMessage(), JacksonUtils.serialize(getDetails()), httpStausCode);
+    }
+
+    public BusinessRuleException changeStatusCode(int httpStausCode) {
+        this.httpStausCode = httpStausCode;
+        return this;
     }
 }

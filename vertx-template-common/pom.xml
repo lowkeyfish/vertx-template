@@ -71,6 +71,14 @@
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.password4j</groupId>
+      <artifactId>password4j</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.github.yitter</groupId>
+      <artifactId>yitter-idgenerator</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -79,11 +87,6 @@
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jsr310</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.github.yitter</groupId>
-      <artifactId>yitter-idgenerator</artifactId>
     </dependency>
 
     <dependency>
