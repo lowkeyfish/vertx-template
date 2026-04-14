@@ -6,7 +6,7 @@
 package com.yujunyang.vertx.template.common.vertx;
 
 import com.yujunyang.vertx.template.common.exceptions.AppException;
-import com.yujunyang.vertx.template.common.exceptions.ExceptionCodeType;
+import com.yujunyang.vertx.template.common.exceptions.ErrorType;
 import com.yujunyang.vertx.template.common.utils.OtelUtils;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.jwt.JWTAuth;
@@ -45,7 +45,7 @@ public final class RoutingContextUtils {
     public static JsonObject requestBody(RoutingContext routingContext) {
         JsonObject requestBody = routingContext.body().asJsonObject();
         if (requestBody == null) {
-            throw new AppException("参数为空", ExceptionCodeType.BAD_REQUEST);
+            throw new AppException(ErrorType.VALIDATION_FAILED, "参数为空");
         }
         return requestBody;
     }

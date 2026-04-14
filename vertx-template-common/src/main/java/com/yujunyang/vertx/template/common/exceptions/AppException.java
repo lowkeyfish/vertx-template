@@ -1,8 +1,3 @@
-/*
- * SPDX-FileCopyrightText: 2026 Yu Junyang (https://github.com/lowkeyfish)
- * SPDX-License-Identifier: MIT
- */
-
 package com.yujunyang.vertx.template.common.exceptions;
 
 import com.yujunyang.vertx.template.common.utils.JacksonUtils;
@@ -11,68 +6,55 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AppException extends RuntimeException {
-    private int httpStausCode = 400;
-    private ExceptionCodeType code = ExceptionCodeType.BAD_REQUEST;
+    private ErrorType error;
+    private String userMessage;
     private Map<String, Object> details = new HashMap<>();
 
-    public AppException(String message) {
+    public AppException(ErrorType error, String message) {
         super(message);
+        this.userMessage = message;
+        this.error = error;
     }
 
-    public AppException(String message, Map<String, Object> details) {
+    public AppException(ErrorType error, String message, String userMessage) {
         super(message);
+        this.userMessage = userMessage;
+        this.error = error;
+    }
+
+    public AppException(ErrorType error, String message, Map<String, Object> details) {
+        super(message);
+        this.userMessage = message;
+        this.error = error;
         this.details = details;
     }
 
-    public AppException(String message, ExceptionCodeType code) {
+    public AppException(ErrorType error, String message, Map<String, Object> details, String userMessage) {
         super(message);
-        this.code = code;
-    }
-
-    public AppException(String message, ExceptionCodeType code, Map<String, Object> details) {
-        super(message);
-        this.code = code;
+        this.userMessage = userMessage;
+        this.error = error;
         this.details = details;
     }
 
-    public AppException(Throwable cause) {
-        super(cause);
-    }
-
-    public AppException(
-            String message,
-            Throwable cause,
-            boolean enableSuppression,
-            boolean writableStackTrace,
-            ExceptionCodeType code) {
-        super(message, cause, enableSuppression, writableStackTrace);
-        this.code = code;
-    }
-
-    public ExceptionCodeType getCode() {
-        return code;
-    }
-
-    public String getCodeText() {
-        return code.name();
+    public ErrorType getError() {
+        return error;
     }
 
     public Map<String, Object> getDetails() {
         return details;
     }
 
-    public int getHttpStausCode() {
-        return httpStausCode;
+    public String getUserMessage() {
+        return userMessage;
     }
 
     public String detailedMessage() {
         return MessageFormat.format(
-                "code({0}),message({1}),details({2}),httpStatusCode({3})",
-                code.name(), super.getMessage(), JacksonUtils.serialize(getDetails()), httpStausCode);
-    }
-
-    public AppException changeStatusCode(int httpStausCode) {
-        this.httpStausCode = httpStausCode;
-        return this;
+                "code({0}),errorCode({1}),message({2}),details({3}),userMessage({4})",
+                error.getCode(),
+                error.getErrorCode(),
+                super.getMessage(),
+                JacksonUtils.serialize(getDetails()),
+                userMessage);
     }
 }
