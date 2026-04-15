@@ -5,7 +5,7 @@
 
 package com.yujunyang.vertx.template.common.password;
 
-import com.yujunyang.vertx.template.common.exceptions.AppException;
+import com.yujunyang.vertx.template.common.exceptions.BusinessException;
 import com.yujunyang.vertx.template.common.exceptions.ErrorType;
 import com.yujunyang.vertx.template.common.utils.CheckUtils;
 import java.util.Map;
@@ -22,33 +22,33 @@ public class DefaultPasswordValidator implements PasswordValidator {
         CheckUtils.notBlank(rawPassword, "rawPassword不能为空");
         CheckUtils.isTrue(
                 rawPassword.length() >= 8,
-                new AppException(
-                        ErrorType.VALIDATION_PASSWORD_FORMAT_INVALID, "密码最少8个字符", Map.of("password", rawPassword)));
+                new BusinessException(
+                        "密码最少8个字符", ErrorType.VALIDATION_PASSWORD_FORMAT_INVALID, Map.of("password", rawPassword)));
         CheckUtils.isTrue(
                 rawPassword.length() <= 16,
-                new AppException(
-                        ErrorType.VALIDATION_PASSWORD_FORMAT_INVALID, "密码最多16个字符", Map.of("password", rawPassword)));
+                new BusinessException(
+                        "密码最多16个字符", ErrorType.VALIDATION_PASSWORD_FORMAT_INVALID, Map.of("password", rawPassword)));
         CheckUtils.isTrue(
                 Pattern.matches(PATTERN_UPPERCASE, rawPassword),
-                new AppException(
-                        ErrorType.VALIDATION_PASSWORD_FORMAT_INVALID,
+                new BusinessException(
                         "密码至少需要包含一个大写字母",
+                        ErrorType.VALIDATION_PASSWORD_FORMAT_INVALID,
                         Map.of("password", rawPassword)));
         CheckUtils.isTrue(
                 Pattern.matches(PATTERN_LOWERCASE, rawPassword),
-                new AppException(
-                        ErrorType.VALIDATION_PASSWORD_FORMAT_INVALID,
+                new BusinessException(
                         "密码至少需要包含一个小写字母",
+                        ErrorType.VALIDATION_PASSWORD_FORMAT_INVALID,
                         Map.of("password", rawPassword)));
         CheckUtils.isTrue(
                 Pattern.matches(PATTERN_DIGIT, rawPassword),
-                new AppException(
-                        ErrorType.VALIDATION_PASSWORD_FORMAT_INVALID, "密码至少需要包含一个数字", Map.of("password", rawPassword)));
+                new BusinessException(
+                        "密码至少需要包含一个数字", ErrorType.VALIDATION_PASSWORD_FORMAT_INVALID, Map.of("password", rawPassword)));
         CheckUtils.isTrue(
                 Pattern.matches(PATTERN_SPECIAL_CHARACTER, rawPassword),
-                new AppException(
-                        ErrorType.VALIDATION_PASSWORD_FORMAT_INVALID,
+                new BusinessException(
                         "密码至少需要包含一个特殊字符",
+                        ErrorType.VALIDATION_PASSWORD_FORMAT_INVALID,
                         Map.of("password", rawPassword)));
     }
 }
