@@ -7,8 +7,8 @@ package com.yujunyang.vertx.template.common.domain.id;
 
 import com.github.yitter.idgen.YitIdHelper;
 
-public interface IdGenerator {
-    default long nextId() {
+public interface LongIdGenerator {
+    default long nextLongId() {
         return YitIdHelper.nextId();
     }
 }
