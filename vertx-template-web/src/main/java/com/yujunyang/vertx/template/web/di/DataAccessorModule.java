@@ -14,6 +14,4 @@ import dagger.Module;
 public abstract class DataAccessorModule {
     @Binds
     public abstract TestDataAccessor bingTestDataAccessor(TestDataAccessorImpl testDataAccessor);
-
-
 }

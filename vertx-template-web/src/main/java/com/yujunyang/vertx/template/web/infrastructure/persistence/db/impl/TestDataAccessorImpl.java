@@ -11,8 +11,7 @@ import javax.inject.Inject;
 
 public class TestDataAccessorImpl implements TestDataAccessor {
     @Inject
-    public TestDataAccessorImpl() {
-    }
+    public TestDataAccessorImpl() {}
 
     @Override
     public TestDataModel selectById(long id) {

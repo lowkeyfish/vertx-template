@@ -6,8 +6,6 @@
 package com.yujunyang.vertx.template.web.di;
 
 import com.yujunyang.vertx.template.web.domain.test.TestRepository;
-import com.yujunyang.vertx.template.web.infrastructure.persistence.db.TestDataAccessor;
-import com.yujunyang.vertx.template.web.infrastructure.persistence.db.impl.TestDataAccessorImpl;
 import com.yujunyang.vertx.template.web.infrastructure.persistence.repository.TestRepositoryImpl;
 import dagger.Binds;
 import dagger.Module;
@@ -16,6 +14,4 @@ import dagger.Module;
 public abstract class RepositoryModule {
     @Binds
     public abstract TestRepository bingTestRepository(TestRepositoryImpl testRepository);
-
-
 }
