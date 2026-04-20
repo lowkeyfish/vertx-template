@@ -5,4 +5,8 @@
 
 package com.yujunyang.vertx.template.web.infrastructure.persistence.db;
 
-public interface TestDataAccessor {}
+import com.yujunyang.vertx.template.web.infrastructure.persistence.db.model.TestDataModel;
+
+public interface TestDataAccessor {
+    TestDataModel selectById(long id);
+}

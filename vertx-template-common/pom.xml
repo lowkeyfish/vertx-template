@@ -125,5 +125,12 @@
       <groupId>io.opentelemetry.instrumentation</groupId>
       <artifactId>opentelemetry-log4j-context-data-2.17-autoconfigure</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>com.google.dagger</groupId>
+      <artifactId>dagger</artifactId>
+    </dependency>
+
+
   </dependencies>
 </project>

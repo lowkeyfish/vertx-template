@@ -33,6 +33,7 @@
     <yitter-idgenerator.version>1.0.6</yitter-idgenerator.version>
     <opentelemetry.version>1.46.0</opentelemetry.version>
     <password4j.version>1.8.4</password4j.version>
+    <dagger.version>2.59.2</dagger.version>
   </properties>
 
   <dependencyManagement>
@@ -113,11 +114,32 @@
         <version>2.12.0-alpha</version>
       </dependency>
 
+      <dependency>
+        <groupId>com.google.dagger</groupId>
+        <artifactId>dagger</artifactId>
+        <version>${dagger.version}</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <release>21</release>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>com.google.dagger</groupId>
+              <artifactId>dagger-compiler</artifactId>
+              <version>${dagger.version}</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>com.diffplug.spotless</groupId>
         <artifactId>spotless-maven-plugin</artifactId>

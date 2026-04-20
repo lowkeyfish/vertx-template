@@ -5,4 +5,17 @@
 
 package com.yujunyang.vertx.template.web.infrastructure.persistence.db.impl;
 
-public class TestDataAccessorImpl {}
+import com.yujunyang.vertx.template.web.infrastructure.persistence.db.TestDataAccessor;
+import com.yujunyang.vertx.template.web.infrastructure.persistence.db.model.TestDataModel;
+import javax.inject.Inject;
+
+public class TestDataAccessorImpl implements TestDataAccessor {
+    @Inject
+    public TestDataAccessorImpl() {
+    }
+
+    @Override
+    public TestDataModel selectById(long id) {
+        return null;
+    }
+}
