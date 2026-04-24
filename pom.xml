@@ -29,11 +29,13 @@
     <junit-jupiter.version>5.9.1</junit-jupiter.version>
     <log4j.versoin>2.25.3</log4j.versoin>
     <apache.commons.lang3.version>3.20.0</apache.commons.lang3.version>
+    <apache.commons.collections4.version>4.4</apache.commons.collections4.version>
     <google.guava.version>33.5.0-jre</google.guava.version>
     <yitter-idgenerator.version>1.0.6</yitter-idgenerator.version>
     <opentelemetry.version>1.46.0</opentelemetry.version>
     <password4j.version>1.8.4</password4j.version>
     <dagger.version>2.59.2</dagger.version>
+    <redisson.version>4.3.1</redisson.version>
   </properties>
 
   <dependencyManagement>
@@ -76,6 +78,11 @@
         <version>${apache.commons.lang3.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-collections4</artifactId>
+        <version>${apache.commons.collections4.version}</version>
+      </dependency>
+      <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
         <version>${google.guava.version}</version>
@@ -91,11 +98,6 @@
         <version>${password4j.version}</version>
       </dependency>
 
-      <dependency>
-        <groupId>io.opentelemetry.proto</groupId>
-        <artifactId>opentelemetry-proto</artifactId>
-        <version>1.10.0-alpha</version>
-      </dependency>
       <dependency>
         <groupId>io.opentelemetry</groupId>
         <artifactId>opentelemetry-bom</artifactId>
@@ -113,11 +115,22 @@
         <artifactId>opentelemetry-log4j-context-data-2.17-autoconfigure</artifactId>
         <version>2.12.0-alpha</version>
       </dependency>
+      <dependency>
+        <groupId>io.opentelemetry.proto</groupId>
+        <artifactId>opentelemetry-proto</artifactId>
+        <version>1.10.0-alpha</version>
+      </dependency>
 
       <dependency>
         <groupId>com.google.dagger</groupId>
         <artifactId>dagger</artifactId>
         <version>${dagger.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.redisson</groupId>
+        <artifactId>redisson</artifactId>
+        <version>${redisson.version}</version>
       </dependency>
 
     </dependencies>
@@ -146,6 +159,7 @@
         <version>3.3.0</version>
         <configuration>
           <java>
+            <!--            <googleJavaFormat></googleJavaFormat>-->
             <palantirJavaFormat>
               <formatJavadoc>true</formatJavadoc>
             </palantirJavaFormat>

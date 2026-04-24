@@ -16,5 +16,7 @@ public class TestApplicationService {
         this.testRepository = testRepository;
     }
 
-    public void test() {}
+    public void test() {
+        System.out.println("test dagger");
+    }
 }
