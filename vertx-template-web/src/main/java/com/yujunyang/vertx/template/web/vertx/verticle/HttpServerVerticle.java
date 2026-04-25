@@ -5,8 +5,8 @@
 
 package com.yujunyang.vertx.template.web.vertx.verticle;
 
+import com.yujunyang.vertx.template.common.config.ApplicationConfigManager;
 import com.yujunyang.vertx.template.common.log4j2.DataMessage;
-import com.yujunyang.vertx.template.common.vertx.config.ApplicationConfigManager;
 import com.yujunyang.vertx.template.common.vertx.router.AllRouter;
 import com.yujunyang.vertx.template.web.vertx.router.GraphQLRouter;
 import com.yujunyang.vertx.template.web.vertx.router.HealthRouter;

@@ -1,8 +1,3 @@
-/*
- * SPDX-FileCopyrightText: 2026 Yu Junyang (https://github.com/lowkeyfish)
- * SPDX-License-Identifier: MIT
- */
-
 package com.yujunyang.vertx.template.common.password;
 
 import com.yujunyang.vertx.template.common.exceptions.BusinessException;
@@ -10,12 +5,18 @@ import com.yujunyang.vertx.template.common.exceptions.ErrorType;
 import com.yujunyang.vertx.template.common.utils.CheckUtils;
 import java.util.Map;
 import java.util.regex.Pattern;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class DefaultPasswordValidator implements PasswordValidator {
     private static final String PATTERN_DIGIT = "\\d";
     private static final String PATTERN_UPPERCASE = "[A-Z]";
     private static final String PATTERN_LOWERCASE = "[a-z]";
     private static final String PATTERN_SPECIAL_CHARACTER = "[-~!@#$%^&*()_+={}\\[\\]|\\;:'\",<>./?]";
+
+    @Inject
+    public DefaultPasswordValidator() {}
 
     @Override
     public void validate(CharSequence rawPassword) {

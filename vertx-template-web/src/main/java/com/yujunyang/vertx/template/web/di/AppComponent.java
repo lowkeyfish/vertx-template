@@ -1,18 +1,19 @@
-/*
- * SPDX-FileCopyrightText: 2026 Yu Junyang (https://github.com/lowkeyfish)
- * SPDX-License-Identifier: MIT
- */
-
 package com.yujunyang.vertx.template.web.di;
 
-import com.yujunyang.vertx.template.web.application.TestApplicationService;
+import com.yujunyang.vertx.template.common.config.ApplicationConfigProvider;
 import dagger.Component;
+import io.vertx.core.Vertx;
+import javax.inject.Singleton;
+import org.redisson.api.RedissonClient;
 
-@Component(modules = {DataAccessorModule.class, RepositoryModule.class})
+@Singleton
+@Component(modules = {AppModule.class})
 public interface AppComponent {
-    TestApplicationService getTestApplicationService();
+    ServiceComponent.Factory serviceComponent();
 
-    // TestRepository getTestRepository();
-    //
-    // TestDataAccessor getTestDataAccessor();
+    Vertx getVertx();
+
+    ApplicationConfigProvider getApplicationConfigProvider();
+
+    RedissonClient getRedissonClient();
 }

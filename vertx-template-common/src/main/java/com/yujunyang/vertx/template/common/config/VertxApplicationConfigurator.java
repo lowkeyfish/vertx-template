@@ -1,9 +1,4 @@
-/*
- * SPDX-FileCopyrightText: 2026 Yu Junyang (https://github.com/lowkeyfish)
- * SPDX-License-Identifier: MIT
- */
-
-package com.yujunyang.vertx.template.common.vertx.config;
+package com.yujunyang.vertx.template.common.config;
 
 import com.yujunyang.vertx.template.common.environment.EnvironmentType;
 import com.yujunyang.vertx.template.common.environment.EnvironmentUtils;

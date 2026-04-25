@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.util.List;
 
+/** 这个Error结构用于给调用方返回输出 { code, error: { type, message, details: [ { field, message, extra: {} } ] } } */
 @JsonInclude(Include.NON_NULL)
 public class Error {
     private ErrorType type;

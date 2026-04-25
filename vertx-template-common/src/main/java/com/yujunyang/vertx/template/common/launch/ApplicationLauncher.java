@@ -7,13 +7,13 @@ package com.yujunyang.vertx.template.common.launch;
 
 import com.github.yitter.contract.IdGeneratorOptions;
 import com.github.yitter.idgen.YitIdHelper;
+import com.yujunyang.vertx.template.common.config.ApplicationConfigManager;
+import com.yujunyang.vertx.template.common.config.DefaultApplicationConfig;
+import com.yujunyang.vertx.template.common.config.VertxApplicationConfigurator;
 import com.yujunyang.vertx.template.common.environment.EnvironmentType;
 import com.yujunyang.vertx.template.common.environment.EnvironmentUtils;
 import com.yujunyang.vertx.template.common.log4j2.Log4j2Configurator;
 import com.yujunyang.vertx.template.common.utils.CheckUtils;
-import com.yujunyang.vertx.template.common.vertx.config.ApplicationConfigManager;
-import com.yujunyang.vertx.template.common.vertx.config.DefaultApplicationConfig;
-import com.yujunyang.vertx.template.common.vertx.config.VertxApplicationConfigurator;
 import io.vertx.core.Future;
 import io.vertx.core.VerticleBase;
 import io.vertx.core.Vertx;

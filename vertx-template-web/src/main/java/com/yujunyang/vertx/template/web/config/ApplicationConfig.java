@@ -7,7 +7,7 @@ package com.yujunyang.vertx.template.web.config;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.yujunyang.vertx.template.common.vertx.config.DefaultApplicationConfig;
+import com.yujunyang.vertx.template.common.config.DefaultApplicationConfig;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApplicationConfig extends DefaultApplicationConfig {
