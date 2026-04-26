@@ -1,101 +1,44 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Yu Junyang (https://github.com/lowkeyfish)
+ * SPDX-License-Identifier: MIT
+ */
+
 package com.yujunyang.vertx.template.common.event;
 
 import io.vertx.core.Context;
 import io.vertx.core.Vertx;
 import io.vertx.core.spi.context.storage.AccessMode;
 import io.vertx.core.spi.context.storage.ContextLocal;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class DomainEventPublisher {
-    private static final ContextLocal<DomainEventPublisher> CONTEXT_LOCAL_KEY =
-            ContextLocal.registerLocal(DomainEventPublisher.class);
+public final class DomainEventPublisher {
+    private static final ContextLocal<EventList> CONTEXT_LOCAL_KEY_EVENTS = ContextLocal.registerLocal(EventList.class);
 
-    private boolean publishing;
-    private List subscribers;
+    public static void publish(DomainEvent domainEvent) {
+        eventList().add(domainEvent);
+    }
 
-    public static DomainEventPublisher instance() {
+    public static void publishAll(Collection<DomainEvent> domainEvents) {
+        eventList().addAll(domainEvents);
+    }
+
+    private static EventList eventList() {
         Context context = Vertx.currentContext();
-        DomainEventPublisher domainEventPublisher =
-                context.getLocal(CONTEXT_LOCAL_KEY, AccessMode.CONCURRENT, () -> new DomainEventPublisher());
-        return domainEventPublisher;
+        EventList eventList = context.getLocal(CONTEXT_LOCAL_KEY_EVENTS, AccessMode.CONCURRENT, EventList::new);
+        return eventList;
     }
 
-    public <T> void publish(final T aDomainEvent) {
-        if (!this.isPublishing() && this.hasSubscribers()) {
-
-            try {
-                this.setPublishing(true);
-
-                Class<?> eventType = aDomainEvent.getClass();
-
-                List<DomainEventSubscriber<T>> allSubscribers = this.subscribers();
-
-                for (DomainEventSubscriber<T> subscriber : allSubscribers) {
-                    Class<?> subscribedToType = subscriber.subscribedToEventType();
-
-                    if (eventType == subscribedToType || subscribedToType == DomainEvent.class) {
-                        subscriber.handleEvent(aDomainEvent);
-                    }
-                }
-
-            } finally {
-                this.setPublishing(false);
-            }
-        }
+    public static List<DomainEvent> getEvents() {
+        return eventList().getAll();
     }
 
-    public void publishAll(Collection<DomainEvent> aDomainEvents) {
-        for (DomainEvent domainEvent : aDomainEvents) {
-            this.publish(domainEvent);
-        }
+    public static void clear() {
+        eventList().clear();
     }
 
-    public void reset() {
-        if (!this.isPublishing()) {
-            this.setSubscribers(null);
-        }
-    }
-
-    public <T> void subscribe(DomainEventSubscriber<T> aSubscriber) {
-        if (!this.isPublishing()) {
-            this.ensureSubscribersList();
-
-            this.subscribers().add(aSubscriber);
-        }
-    }
-
-    private DomainEventPublisher() {
-        super();
-
-        this.setPublishing(false);
-        this.ensureSubscribersList();
-    }
-
-    private void ensureSubscribersList() {
-        if (!this.hasSubscribers()) {
-            this.setSubscribers(new ArrayList());
-        }
-    }
-
-    private boolean isPublishing() {
-        return this.publishing;
-    }
-
-    private void setPublishing(boolean aFlag) {
-        this.publishing = aFlag;
-    }
-
-    private boolean hasSubscribers() {
-        return this.subscribers() != null;
-    }
-
-    private List subscribers() {
-        return this.subscribers;
-    }
-
-    private void setSubscribers(List aSubscriberList) {
-        this.subscribers = aSubscriberList;
+    public static void reset() {
+        Context context = Vertx.currentContext();
+        context.removeLocal(CONTEXT_LOCAL_KEY_EVENTS);
     }
 }

@@ -1,8 +1,13 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Yu Junyang (https://github.com/lowkeyfish)
+ * SPDX-License-Identifier: MIT
+ */
+
 package com.yujunyang.vertx.template.common.event;
 
-public interface DomainEventSubscriber<T> {
+import io.vertx.core.Future;
 
-    public void handleEvent(final T aDomainEvent);
+public interface DomainEventSubscriber {
 
-    public Class<T> subscribedToEventType();
+    Future<Void> handleEvents();
 }
