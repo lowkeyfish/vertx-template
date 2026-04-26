@@ -41,9 +41,8 @@ public class RedisTemplate {
             if (!acquired) {
                 return Future.failedFuture(new LockAcquisitionFailedException("锁获取失败: " + lockKey));
             }
-            return action.get()
-                    .eventually(() -> Future.fromCompletionStage(lock.unlockAsync(), context)
-                            .onFailure(ex -> LOGGER.error("Redisson释放锁({})失败: {}", lockKey, ex.getMessage(), ex)));
+            return action.get().eventually(() -> Future.fromCompletionStage(lock.unlockAsync(), context)
+                    .onFailure(ex -> LOGGER.error("Redisson释放锁({})失败: {}", lockKey, ex.getMessage(), ex)));
         });
     }
 
