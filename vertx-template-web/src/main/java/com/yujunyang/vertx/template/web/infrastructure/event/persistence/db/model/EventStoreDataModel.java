@@ -5,4 +5,9 @@
 
 package com.yujunyang.vertx.template.web.infrastructure.event.persistence.db.model;
 
-public class EventStoreDataModel {}
+public record EventStoreDataModel(long id, String eventType, String eventBody, long timestamp, String eventKey) {
+
+    public EventStoreDataModel(String eventType, String eventBody, long timestamp, String eventKey) {
+        this(0, eventType, eventBody, timestamp, eventKey);
+    }
+}

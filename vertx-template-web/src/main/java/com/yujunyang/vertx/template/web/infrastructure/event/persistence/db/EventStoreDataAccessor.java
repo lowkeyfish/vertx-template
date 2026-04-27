@@ -5,4 +5,12 @@
 
 package com.yujunyang.vertx.template.web.infrastructure.event.persistence.db;
 
-public interface EventStoreDataAccessor {}
+import com.yujunyang.vertx.template.web.infrastructure.event.persistence.db.model.EventStoreDataModel;
+import io.vertx.core.Future;
+import java.util.List;
+
+public interface EventStoreDataAccessor {
+    Future<Integer> insert(EventStoreDataModel dataModel);
+
+    Future<List<EventStoreDataModel>> select(String eventType, long minEventId, int limit);
+}

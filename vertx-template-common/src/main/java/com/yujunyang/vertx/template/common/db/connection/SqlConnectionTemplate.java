@@ -34,7 +34,7 @@ public class SqlConnectionTemplate {
         }
     }
 
-    public Future<Void> executeUpdate(String sql, Tuple params) {
-        return withConnection(conn -> conn.preparedQuery(sql).execute(params).mapEmpty());
+    public Future<Integer> executeUpdate(String sql, Tuple params) {
+        return withConnection(conn -> conn.preparedQuery(sql).execute(params).map(r -> r.rowCount()));
     }
 }

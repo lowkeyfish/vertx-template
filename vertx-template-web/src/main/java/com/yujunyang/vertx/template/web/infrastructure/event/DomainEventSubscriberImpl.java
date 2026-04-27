@@ -33,7 +33,7 @@ public class DomainEventSubscriberImpl implements DomainEventSubscriber {
 
         List<Future<Void>> futures = new ArrayList<>();
         for (DomainEvent event : events) {
-            futures.add(eventStore.add(event, null));
+            futures.add(eventStore.add(event));
         }
         return Future.all(futures).mapEmpty();
     }

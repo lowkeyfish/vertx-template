@@ -9,8 +9,6 @@ public interface DomainEvent {
 
     long getTimestamp();
 
-    String eventKey();
-
     default String notificationType() {
         return this.getClass().getSimpleName();
     }
@@ -20,6 +18,8 @@ public interface DomainEvent {
     }
 
     String notificationRoutingKey();
+
+    String storedEventKey();
 
     default String storedEventType() {
         return this.getClass().getName();
