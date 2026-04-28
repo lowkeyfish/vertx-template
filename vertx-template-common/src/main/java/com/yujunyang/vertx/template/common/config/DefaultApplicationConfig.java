@@ -5,10 +5,8 @@
 
 package com.yujunyang.vertx.template.common.config;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class DefaultApplicationConfig {
     @JsonProperty("vertx")
     private VertxConfig vertx;
@@ -21,6 +19,9 @@ public class DefaultApplicationConfig {
 
     @JsonProperty("redis")
     private RedisConfig redis;
+
+    @JsonProperty("jwt")
+    private JWTConfig jwt;
 
     public VertxConfig getVertx() {
         return vertx;
@@ -52,5 +53,13 @@ public class DefaultApplicationConfig {
 
     public void setRedis(RedisConfig redis) {
         this.redis = redis;
+    }
+
+    public JWTConfig getJwt() {
+        return jwt;
+    }
+
+    public void setJwt(JWTConfig jwt) {
+        this.jwt = jwt;
     }
 }

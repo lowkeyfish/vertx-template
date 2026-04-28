@@ -5,6 +5,7 @@
 
 package com.yujunyang.vertx.template.web.di;
 
+import com.yujunyang.vertx.template.common.authentication.di.AuthenticationModule;
 import com.yujunyang.vertx.template.common.config.di.ApplicationConfigModule;
 import com.yujunyang.vertx.template.common.db.di.DatabaseModule;
 import com.yujunyang.vertx.template.common.password.di.PasswordModule;
@@ -21,6 +22,7 @@ import dagger.Module;
             RedisModule.class,
             PasswordModule.class,
             EventModule.class,
+            AuthenticationModule.class,
             DataAccessorModule.class,
             RepositoryModule.class,
             ServiceModule.class
