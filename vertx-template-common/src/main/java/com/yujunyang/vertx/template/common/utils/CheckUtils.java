@@ -5,6 +5,7 @@
 
 package com.yujunyang.vertx.template.common.utils;
 
+import io.vertx.core.Future;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.text.MessageFormat;
@@ -205,6 +206,15 @@ public final class CheckUtils {
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public static Future<Void> future(Runnable runnable) {
+        try {
+            runnable.run();
+            return Future.succeededFuture();
+        } catch (Exception e) {
+            return Future.failedFuture(e);
         }
     }
 }
