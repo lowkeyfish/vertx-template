@@ -11,6 +11,8 @@ import java.util.Map;
 import org.apache.logging.log4j.message.ObjectMessage;
 
 public final class DataMessage {
+    private DataMessage() {}
+
     public static ObjectMessage of(String message) {
         return DataMessage.of(message, null);
     }
