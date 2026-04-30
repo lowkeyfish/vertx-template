@@ -32,9 +32,8 @@ public class RedisModule {
     @Provides
     public Redis provideRedis(Vertx vertx, ApplicationConfigProvider applicationConfigProvider) {
         RedisConfig redisConfig = applicationConfigProvider.getConfig().getRedis();
-        RedisOptions options = new RedisOptions()
-                .setConnectionString(redisConfig.getAddress())
-                .setPassword(redisConfig.getPassword());
+        RedisOptions options =
+                new RedisOptions().setConnectionString(redisConfig.getAddress()).setPassword(redisConfig.getPassword());
 
         Redis redis = Redis.createClient(vertx, options);
         return redis;
