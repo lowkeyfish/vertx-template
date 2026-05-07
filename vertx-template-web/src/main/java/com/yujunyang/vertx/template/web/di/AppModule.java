@@ -11,7 +11,7 @@ import com.yujunyang.vertx.template.common.db.di.DatabaseModule;
 import com.yujunyang.vertx.template.common.password.di.PasswordModule;
 import com.yujunyang.vertx.template.common.redis.di.RedisModule;
 import com.yujunyang.vertx.template.common.vertx.di.VertxModule;
-import com.yujunyang.vertx.template.web.infrastructure.event.di.EventModule;
+import com.yujunyang.vertx.template.web.infrastructure.di.InfrastructureModule;
 import dagger.Module;
 
 @Module(
@@ -21,10 +21,8 @@ import dagger.Module;
             DatabaseModule.class,
             RedisModule.class,
             PasswordModule.class,
-            EventModule.class,
+            AliyunModule.class,
             AuthenticationModule.class,
-            DataAccessorModule.class,
-            RepositoryModule.class,
-            ServiceModule.class
+            InfrastructureModule.class
         })
 public class AppModule {}

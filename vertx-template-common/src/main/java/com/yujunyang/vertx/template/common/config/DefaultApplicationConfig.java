@@ -23,6 +23,9 @@ public class DefaultApplicationConfig {
     @JsonProperty("jwt")
     private JWTConfig jwt;
 
+    @JsonProperty("rabbitMQ")
+    private RabbitMQConfig rabbitMQ;
+
     public VertxConfig getVertx() {
         return vertx;
     }
@@ -61,5 +64,13 @@ public class DefaultApplicationConfig {
 
     public void setJwt(JWTConfig jwt) {
         this.jwt = jwt;
+    }
+
+    public RabbitMQConfig getRabbitMQ() {
+        return rabbitMQ;
+    }
+
+    public void setRabbitMQ(RabbitMQConfig rabbitMQ) {
+        this.rabbitMQ = rabbitMQ;
     }
 }

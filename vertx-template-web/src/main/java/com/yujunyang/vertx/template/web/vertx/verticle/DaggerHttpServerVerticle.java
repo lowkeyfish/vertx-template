@@ -8,9 +8,7 @@ package com.yujunyang.vertx.template.web.vertx.verticle;
 import com.yujunyang.vertx.template.common.config.ApplicationConfigManager;
 import com.yujunyang.vertx.template.common.log4j2.DataMessage;
 import com.yujunyang.vertx.template.common.vertx.router.AllRouter;
-import com.yujunyang.vertx.template.web.application.TestApplicationService;
 import com.yujunyang.vertx.template.web.di.AppComponent;
-import com.yujunyang.vertx.template.web.di.ServiceComponent;
 import com.yujunyang.vertx.template.web.vertx.router.GraphQLRouter;
 import com.yujunyang.vertx.template.web.vertx.router.HealthRouter;
 import io.vertx.core.Future;
@@ -30,9 +28,6 @@ public class DaggerHttpServerVerticle extends VerticleBase {
 
     @Override
     public Future<?> start() {
-        ServiceComponent serviceComponent = appComponent.serviceComponent().create();
-        TestApplicationService testApplicationService = serviceComponent.getTestApplicationService();
-
         Router router = Router.router(vertx);
         new AllRouter().appendTo(router);
         new HealthRouter().appendTo(router);

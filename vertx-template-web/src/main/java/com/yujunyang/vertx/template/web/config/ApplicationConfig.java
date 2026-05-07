@@ -11,8 +11,19 @@ import com.yujunyang.vertx.template.common.config.DefaultApplicationConfig;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApplicationConfig extends DefaultApplicationConfig {
+    @JsonProperty("aliyun")
+    private AliyunConfig aliyun;
+
     @JsonProperty("test")
     private int test;
+
+    public AliyunConfig getAliyun() {
+        return aliyun;
+    }
+
+    public void setAliyun(AliyunConfig aliyun) {
+        this.aliyun = aliyun;
+    }
 
     public int getTest() {
         return test;

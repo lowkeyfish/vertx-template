@@ -133,6 +133,12 @@
         <version>${redisson.version}</version>
       </dependency>
 
+      <dependency>
+        <groupId>com.aliyun</groupId>
+        <artifactId>alibabacloud-dysmsapi20170525</artifactId>
+        <version>4.0.10</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 

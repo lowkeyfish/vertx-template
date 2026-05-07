@@ -26,8 +26,16 @@ public class SystemException extends AbstractException {
         super(message, ErrorType.INTERNAL_SERVER_ERROR, null, context, null);
     }
 
+    public SystemException(String message, ErrorType errorType, Map<String, Object> context) {
+        super(message, errorType, null, context, null);
+    }
+
     public SystemException(String message, ErrorType errorType, Throwable cause) {
         super(message, errorType, null, null, cause);
+    }
+
+    public SystemException(String message, ErrorType errorType, Map<String, Object> context, Throwable cause) {
+        super(message, errorType, null, context, cause);
     }
 
     public SystemException(
