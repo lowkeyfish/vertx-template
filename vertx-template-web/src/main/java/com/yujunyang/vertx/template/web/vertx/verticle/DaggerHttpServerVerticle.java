@@ -7,10 +7,10 @@ package com.yujunyang.vertx.template.web.vertx.verticle;
 
 import com.yujunyang.vertx.template.common.config.ApplicationConfigManager;
 import com.yujunyang.vertx.template.common.log4j2.DataMessage;
-import com.yujunyang.vertx.template.common.vertx.router.AllRouter;
 import com.yujunyang.vertx.template.web.di.AppComponent;
 import com.yujunyang.vertx.template.web.vertx.router.GraphQLRouter;
 import com.yujunyang.vertx.template.web.vertx.router.HealthRouter;
+import com.yujunyang.vertx.template.web.vertx.router.PreprocessingRouter;
 import io.vertx.core.Future;
 import io.vertx.core.VerticleBase;
 import io.vertx.ext.web.Router;
@@ -29,7 +29,7 @@ public class DaggerHttpServerVerticle extends VerticleBase {
     @Override
     public Future<?> start() {
         Router router = Router.router(vertx);
-        new AllRouter().appendTo(router);
+        new PreprocessingRouter(appComponent).appendTo(router);
         new HealthRouter().appendTo(router);
         new GraphQLRouter().appendTo(vertx, router);
         int port = ApplicationConfigManager.get().getServer().getPort();
