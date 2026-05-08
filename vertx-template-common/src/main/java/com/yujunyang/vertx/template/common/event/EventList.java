@@ -5,11 +5,20 @@
 
 package com.yujunyang.vertx.template.common.event;
 
+import io.vertx.core.internal.VertxBootstrap;
+import io.vertx.core.spi.VertxServiceProvider;
+import io.vertx.core.spi.context.storage.ContextLocal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class EventList {
+/**
+ * CONTEXT_LOCAL_KEY_EVENTS放到EventList中，EventList作为SPI服务加载
+ * 如果CONTEXT_LOCAL_KEY_EVENTS仅作为一个普通的类的静态变量EventList eventList = context.getLocal(EventList.CONTEXT_LOCAL_KEY_EVENTS, AccessMode.CONCURRENT, EventList::new);使用时将报错
+ */
+public class EventList implements VertxServiceProvider {
+    static final ContextLocal<EventList> CONTEXT_LOCAL_KEY_EVENTS = ContextLocal.registerLocal(EventList.class);
+
     private final List<DomainEvent> events = new ArrayList<>();
 
     public void add(DomainEvent domainEvent) {
@@ -31,4 +40,8 @@ public class EventList {
     public boolean isEmpty() {
         return events.isEmpty();
     }
+
+    @Override
+    public void init(VertxBootstrap vertxBootstrap) {}
 }
+

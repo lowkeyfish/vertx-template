@@ -13,8 +13,6 @@ import java.util.Collection;
 import java.util.List;
 
 public final class DomainEventPublisher {
-    private static final ContextLocal<EventList> CONTEXT_LOCAL_KEY_EVENTS = ContextLocal.registerLocal(EventList.class);
-
     public static void publish(DomainEvent domainEvent) {
         eventList().add(domainEvent);
     }
@@ -25,7 +23,7 @@ public final class DomainEventPublisher {
 
     private static EventList eventList() {
         Context context = Vertx.currentContext();
-        EventList eventList = context.getLocal(CONTEXT_LOCAL_KEY_EVENTS, AccessMode.CONCURRENT, EventList::new);
+        EventList eventList = context.getLocal(EventList.CONTEXT_LOCAL_KEY_EVENTS, AccessMode.CONCURRENT, EventList::new);
         return eventList;
     }
 
@@ -39,6 +37,6 @@ public final class DomainEventPublisher {
 
     public static void reset() {
         Context context = Vertx.currentContext();
-        context.removeLocal(CONTEXT_LOCAL_KEY_EVENTS);
+        context.removeLocal(EventList.CONTEXT_LOCAL_KEY_EVENTS);
     }
 }
