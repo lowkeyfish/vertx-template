@@ -13,8 +13,8 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * CONTEXT_LOCAL_KEY_EVENTS放到EventList中，EventList作为SPI服务加载
- * 如果CONTEXT_LOCAL_KEY_EVENTS仅作为一个普通的类的静态变量EventList eventList = context.getLocal(EventList.CONTEXT_LOCAL_KEY_EVENTS, AccessMode.CONCURRENT, EventList::new);使用时将报错
+ * CONTEXT_LOCAL_KEY_EVENTS放到EventList中，EventList作为SPI服务加载 如果CONTEXT_LOCAL_KEY_EVENTS仅作为一个普通的类的静态变量EventList eventList =
+ * context.getLocal(EventList.CONTEXT_LOCAL_KEY_EVENTS, AccessMode.CONCURRENT, EventList::new);使用时将报错
  */
 public class EventList implements VertxServiceProvider {
     static final ContextLocal<EventList> CONTEXT_LOCAL_KEY_EVENTS = ContextLocal.registerLocal(EventList.class);
@@ -44,4 +44,3 @@ public class EventList implements VertxServiceProvider {
     @Override
     public void init(VertxBootstrap vertxBootstrap) {}
 }
-

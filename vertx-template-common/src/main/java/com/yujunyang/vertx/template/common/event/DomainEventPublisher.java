@@ -8,7 +8,6 @@ package com.yujunyang.vertx.template.common.event;
 import io.vertx.core.Context;
 import io.vertx.core.Vertx;
 import io.vertx.core.spi.context.storage.AccessMode;
-import io.vertx.core.spi.context.storage.ContextLocal;
 import java.util.Collection;
 import java.util.List;
 
@@ -23,7 +22,8 @@ public final class DomainEventPublisher {
 
     private static EventList eventList() {
         Context context = Vertx.currentContext();
-        EventList eventList = context.getLocal(EventList.CONTEXT_LOCAL_KEY_EVENTS, AccessMode.CONCURRENT, EventList::new);
+        EventList eventList =
+                context.getLocal(EventList.CONTEXT_LOCAL_KEY_EVENTS, AccessMode.CONCURRENT, EventList::new);
         return eventList;
     }
 
