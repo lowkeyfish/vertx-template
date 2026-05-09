@@ -5,6 +5,7 @@
 
 package com.yujunyang.vertx.template.common.exceptions;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.util.List;
@@ -22,6 +23,11 @@ public class Error {
         this.details = details;
     }
 
+    public Error(ErrorType type, String message) {
+        this(type, message, null);
+    }
+
+    @JsonIgnore
     public int getCode() {
         return type.getCode();
     }

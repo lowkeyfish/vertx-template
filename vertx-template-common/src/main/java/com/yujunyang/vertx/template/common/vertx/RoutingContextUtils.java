@@ -45,7 +45,7 @@ public final class RoutingContextUtils {
     public static JsonObject requestBody(RoutingContext routingContext) {
         JsonObject requestBody = routingContext.body().asJsonObject();
         if (requestBody == null) {
-            throw new BusinessException("参数为空", ErrorType.VALIDATION_FAILED);
+            throw new BusinessException("参数为空", ErrorType.VALIDATION_REQUEST_BODY);
         }
         return requestBody;
     }

@@ -21,7 +21,9 @@ public final class RedisUtils {
         if (StringUtils.isNotBlank(COMMON_PREFIX)) {
             list.add(COMMON_PREFIX);
         }
-        list.addAll(Arrays.stream(segments).map(n -> String.valueOf(n)).collect(Collectors.toList()));
+        list.addAll(Arrays.stream(segments)
+                .map(n -> String.valueOf(n).replace(':', '_'))
+                .collect(Collectors.toList()));
         return String.join(":", list);
     }
 }

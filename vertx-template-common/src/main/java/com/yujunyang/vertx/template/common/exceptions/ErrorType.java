@@ -15,6 +15,7 @@ package com.yujunyang.vertx.template.common.exceptions;
  * 500 未预期的代码报错；可预期主动抛出的系统错误；<br>
  */
 public enum ErrorType {
+    VALIDATION_REQUEST_BODY(400),
     VALIDATION_FAILED(400),
     VALIDATION_PASSWORD_FORMAT_INVALID(400),
 
@@ -22,6 +23,9 @@ public enum ErrorType {
     AUTHORIZATION_FAILED(403),
 
     RESOURCE_NOT_FOUND(404),
+    API_NOT_FOUND(404),
+
+    API_METHOD_NOT_ALLOWED(405),
 
     VERSION_CONFLICT(409),
 
