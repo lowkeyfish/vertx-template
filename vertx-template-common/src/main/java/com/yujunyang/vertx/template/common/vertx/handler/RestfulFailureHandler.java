@@ -4,6 +4,7 @@ import com.yujunyang.vertx.template.common.exceptions.BusinessException;
 import com.yujunyang.vertx.template.common.exceptions.Error;
 import com.yujunyang.vertx.template.common.exceptions.ErrorType;
 import com.yujunyang.vertx.template.common.exceptions.SystemException;
+import com.yujunyang.vertx.template.common.vertx.RoutingContextUtils;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
@@ -35,22 +36,17 @@ public class RestfulFailureHandler implements Handler<RoutingContext> {
         if (failure instanceof SystemException) {
             SystemException systemException = (SystemException) failure;
             LOGGER.error(systemException.getLogMessage(), systemException);
-            routingContext.json(new JsonObject()
-                    .put("code", 500)
-                    .put("error", new Error(ErrorType.INTERNAL_SERVER_ERROR, "服务器内部错误")));
+            RoutingContextUtils.responseFailure(routingContext, new Error(ErrorType.INTERNAL_SERVER_ERROR, "服务器内部错误"));
             return;
         }
 
         if (failure instanceof BusinessException) {
             BusinessException businessException = (BusinessException) failure;
-            routingContext.json(new JsonObject()
-                    .put("code", businessException.getError().getCode())
-                    .put("error", businessException.getError()));
+            RoutingContextUtils.responseFailure(routingContext, businessException.getError());
             return;
         }
 
-        routingContext.json(
-                new JsonObject().put("code", 500).put("error", new Error(ErrorType.INTERNAL_SERVER_ERROR, "服务器内部错误")));
+        RoutingContextUtils.responseFailure(routingContext, new Error(ErrorType.INTERNAL_SERVER_ERROR, "服务器内部错误"));
         LOGGER.error(failure.getMessage(), failure);
     }
 }

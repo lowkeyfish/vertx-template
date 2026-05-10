@@ -19,11 +19,11 @@ public class TestRouter {
         router.get("/").handler(routingContext -> {
             ContextualData.put("traceId2", OtelUtils.getTraceId());
             LOGGER.info("test router，用于检查是否记录了trace_id和span_id");
-            RoutingContextUtils.response(routingContext, "welcome to sparrow api");
+            RoutingContextUtils.responseSucceeded(routingContext, "welcome");
         });
 
         router.get("/test/:type").handler(ctx -> {
-            RoutingContextUtils.response(ctx, ctx.pathParam("type"));
+            RoutingContextUtils.responseSucceeded(ctx, ctx.pathParam("type"));
         });
     }
 }

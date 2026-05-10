@@ -11,7 +11,7 @@ import io.vertx.ext.web.Router;
 public class HealthRouter {
     public void appendTo(Router router) {
         router.get("/health").handler(rc -> {
-            RoutingContextUtils.response(rc);
+            RoutingContextUtils.responseSucceeded(rc);
         });
     }
 }
