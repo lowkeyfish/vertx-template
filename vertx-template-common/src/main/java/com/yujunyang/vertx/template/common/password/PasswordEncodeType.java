@@ -11,7 +11,6 @@ import com.yujunyang.vertx.template.common.enums.EnumUtils;
 import com.yujunyang.vertx.template.common.enums.ValueDescriptionEnum;
 
 public enum PasswordEncodeType implements ValueDescriptionEnum<Integer> {
-    AES(10, "AES"),
     ARGON2ID(1, "ARGON2ID");
 
     @JsonValue

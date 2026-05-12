@@ -6,6 +6,8 @@
 package com.yujunyang.vertx.template.common.password;
 
 public interface PasswordEncoder {
+    PasswordEncodeType type();
+
     boolean canUse(PasswordEncodeType encodeType);
 
     String encode(CharSequence rawPassword);

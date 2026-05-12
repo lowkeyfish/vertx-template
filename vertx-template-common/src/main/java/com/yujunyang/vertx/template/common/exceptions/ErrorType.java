@@ -39,7 +39,8 @@ public enum ErrorType {
 
     INTERNAL_SERVER_ERROR(500),
     REDISSON_LOCK_ERROR(500),
-    ALIYUN_ERROR(500);
+    ALIYUN_ERROR(500),
+    DATABASE_UNIQUE_CONFLICT(500);
 
     private int code;
 

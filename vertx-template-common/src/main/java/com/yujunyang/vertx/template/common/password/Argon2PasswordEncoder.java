@@ -21,6 +21,11 @@ public class Argon2PasswordEncoder implements PasswordEncoder {
     public Argon2PasswordEncoder() {}
 
     @Override
+    public PasswordEncodeType type() {
+        return PasswordEncodeType.ARGON2ID;
+    }
+
+    @Override
     public boolean canUse(PasswordEncodeType encodeType) {
         return PasswordEncodeType.ARGON2ID.equals(encodeType);
     }
