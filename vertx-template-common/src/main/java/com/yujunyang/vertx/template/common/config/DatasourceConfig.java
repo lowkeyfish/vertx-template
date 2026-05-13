@@ -6,62 +6,40 @@
 package com.yujunyang.vertx.template.common.config;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.yujunyang.vertx.template.common.exceptions.ErrorType;
+import com.yujunyang.vertx.template.common.exceptions.SystemException;
+import com.yujunyang.vertx.template.common.utils.CheckUtils;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DatasourceConfig {
-    @JsonProperty("host")
-    private String host;
+public record DatasourceConfig(String host, String user, String password, Integer port, String database) {
 
-    @JsonProperty("user")
-    private String user;
-
-    @JsonProperty("password")
-    private String password;
-
-    @JsonProperty("port")
-    private int port;
-
-    @JsonProperty("database")
-    private String database;
-
-    public String getHost() {
+    @Override
+    public String host() {
+        CheckUtils.notBlank(host, new SystemException("配置文件缺少配置项[datasource.host]", ErrorType.CONFIG_ERROR));
         return host;
     }
 
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    public String getUser() {
+    @Override
+    public String user() {
+        CheckUtils.notBlank(user, new SystemException("配置文件缺少配置项[datasource.user]", ErrorType.CONFIG_ERROR));
         return user;
     }
 
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getPassword() {
+    @Override
+    public String password() {
+        CheckUtils.notBlank(password, new SystemException("配置文件缺少配置项[datasource.password]", ErrorType.CONFIG_ERROR));
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getPort() {
+    @Override
+    public Integer port() {
+        CheckUtils.notNull(port, new SystemException("配置文件缺少配置项[datasource.port]", ErrorType.CONFIG_ERROR));
         return port;
     }
 
-    public void setPort(int port) {
-        this.port = port;
-    }
-
-    public String getDatabase() {
+    @Override
+    public String database() {
+        CheckUtils.notBlank(database, new SystemException("配置文件缺少配置项[datasource.database]", ErrorType.CONFIG_ERROR));
         return database;
-    }
-
-    public void setDatabase(String database) {
-        this.database = database;
     }
 }

@@ -22,7 +22,7 @@ public class DatabaseModule {
     @Singleton
     public Pool providePool(Vertx vertx, ApplicationConfigProvider configProvider) {
         DefaultApplicationConfig config = configProvider.getConfig();
-        DatasourceConfig datasourceConfig = config.getDatasource();
+        DatasourceConfig datasourceConfig = config.datasource();
         return PoolFactory.createMySQLPool(vertx, datasourceConfig);
     }
 }

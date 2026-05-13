@@ -11,17 +11,12 @@ import com.yujunyang.vertx.template.common.exceptions.SystemException;
 import com.yujunyang.vertx.template.common.utils.CheckUtils;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record RedisConfig(String address, String password) {
+public record CryptoConfig(String aesPassword) {
 
     @Override
-    public String address() {
-        CheckUtils.notBlank(address, new SystemException("配置文件缺少配置项[redis.address]", ErrorType.CONFIG_ERROR));
-        return address;
-    }
-
-    @Override
-    public String password() {
-        CheckUtils.notBlank(password, new SystemException("配置文件缺少配置项[redis.password]", ErrorType.CONFIG_ERROR));
-        return password;
+    public String aesPassword() {
+        CheckUtils.notBlank(
+                aesPassword, new SystemException("配置文件缺少配置项[security.crypto.aesPassword]", ErrorType.CONFIG_ERROR));
+        return aesPassword;
     }
 }

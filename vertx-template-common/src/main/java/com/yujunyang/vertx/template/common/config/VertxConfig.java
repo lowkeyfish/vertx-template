@@ -6,18 +6,18 @@
 package com.yujunyang.vertx.template.common.config;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class VertxConfig {
-    @JsonProperty("deploymentInstances")
-    private int deploymentInstance;
+public record VertxConfig(Integer deploymentInstance) {
+    private static final int DEFAULT_DEPLOYMENT_INSTANCES = 2;
 
-    public int getDeploymentInstance() {
-        return deploymentInstance;
+    public VertxConfig {
+        if (deploymentInstance == null) {
+            deploymentInstance = DEFAULT_DEPLOYMENT_INSTANCES;
+        }
     }
 
-    public void setDeploymentInstance(int deploymentInstance) {
-        this.deploymentInstance = deploymentInstance;
+    public static VertxConfig defaultConfig() {
+        return new VertxConfig(DEFAULT_DEPLOYMENT_INSTANCES);
     }
 }

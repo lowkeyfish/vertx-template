@@ -6,18 +6,18 @@
 package com.yujunyang.vertx.template.common.config;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ServerConfig {
-    @JsonProperty("port")
-    private int port;
+public record ServerConfig(Integer port) {
+    private static final int DEFAULT_PORT = 6060;
 
-    public int getPort() {
-        return port;
+    public ServerConfig {
+        if (port == null) {
+            port = DEFAULT_PORT;
+        }
     }
 
-    public void setPort(int port) {
-        this.port = port;
+    public static ServerConfig defaultConfig() {
+        return new ServerConfig(DEFAULT_PORT);
     }
 }

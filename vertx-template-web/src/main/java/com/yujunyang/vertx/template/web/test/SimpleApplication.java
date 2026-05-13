@@ -20,7 +20,7 @@ public class SimpleApplication {
             ApplicationLauncher.start(vertx, ApplicationConfig.class, v -> {
                         ApplicationConfig applicationConfig = ApplicationConfigManager.get();
                         DeploymentOptions deploymentOptions = new DeploymentOptions()
-                                .setInstances(applicationConfig.getVertx().getDeploymentInstance());
+                                .setInstances(applicationConfig.vertx().deploymentInstance());
 
                         return vertx.deployVerticle(HttpServerVerticle.class, deploymentOptions)
                                 .onSuccess(r -> System.out.println("Verticle全部部署成功"));

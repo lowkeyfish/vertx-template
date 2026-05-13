@@ -54,8 +54,8 @@ public class Application {
 
     private static Future<?> deployVerticle(Vertx vertx) {
         ApplicationConfig applicationConfig = ApplicationConfigManager.get();
-        DeploymentOptions deploymentOptions = new DeploymentOptions()
-                .setInstances(applicationConfig.getVertx().getDeploymentInstance());
+        DeploymentOptions deploymentOptions =
+                new DeploymentOptions().setInstances(applicationConfig.vertx().deploymentInstance());
         return vertx.deployVerticle(HttpServerVerticle.class, deploymentOptions)
                 .onSuccess(r -> System.out.println("Verticle全部部署成功"));
     }

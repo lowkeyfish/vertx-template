@@ -6,29 +6,22 @@
 package com.yujunyang.vertx.template.common.config;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.yujunyang.vertx.template.common.exceptions.ErrorType;
+import com.yujunyang.vertx.template.common.exceptions.SystemException;
+import com.yujunyang.vertx.template.common.utils.CheckUtils;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class JWTConfig {
-    @JsonProperty("secret")
-    private String secret;
+public record JWTConfig(String secret, String algorithm) {
 
-    @JsonProperty("algorithm")
-    private String algorithm;
-
-    public String getSecret() {
+    @Override
+    public String secret() {
+        CheckUtils.notBlank(secret, new SystemException("配置文件缺少配置项[jwt.secret]", ErrorType.CONFIG_ERROR));
         return secret;
     }
 
-    public void setSecret(String secret) {
-        this.secret = secret;
-    }
-
-    public String getAlgorithm() {
+    @Override
+    public String algorithm() {
+        CheckUtils.notBlank(algorithm, new SystemException("配置文件缺少配置项[jwt.algorithm]", ErrorType.CONFIG_ERROR));
         return algorithm;
-    }
-
-    public void setAlgorithm(String algorithm) {
-        this.algorithm = algorithm;
     }
 }

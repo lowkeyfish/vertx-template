@@ -21,19 +21,19 @@ import org.redisson.config.Config;
 public class RedisModule {
     @Provides
     public RedissonClient provideRedissonClient(ApplicationConfigProvider applicationConfigProvider) {
-        RedisConfig redisConfig = applicationConfigProvider.getConfig().getRedis();
+        RedisConfig redisConfig = applicationConfigProvider.getConfig().redis();
         Config config = new Config();
-        config.setPassword(redisConfig.getPassword());
-        config.useSingleServer().setAddress(redisConfig.getAddress());
+        config.setPassword(redisConfig.password());
+        config.useSingleServer().setAddress(redisConfig.address());
         RedissonClient redissonClient = Redisson.create(config);
         return redissonClient;
     }
 
     @Provides
     public Redis provideRedis(Vertx vertx, ApplicationConfigProvider applicationConfigProvider) {
-        RedisConfig redisConfig = applicationConfigProvider.getConfig().getRedis();
+        RedisConfig redisConfig = applicationConfigProvider.getConfig().redis();
         RedisOptions options =
-                new RedisOptions().setConnectionString(redisConfig.getAddress()).setPassword(redisConfig.getPassword());
+                new RedisOptions().setConnectionString(redisConfig.address()).setPassword(redisConfig.password());
 
         Redis redis = Redis.createClient(vertx, options);
         return redis;

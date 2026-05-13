@@ -46,8 +46,8 @@ public class DaggerApplication {
     private static Future<?> deployVerticle(Vertx vertx, AppComponent appComponent) {
         ApplicationConfig applicationConfig =
                 appComponent.getApplicationConfigProvider().getConfig();
-        DeploymentOptions deploymentOptions = new DeploymentOptions()
-                .setInstances(applicationConfig.getVertx().getDeploymentInstance());
+        DeploymentOptions deploymentOptions =
+                new DeploymentOptions().setInstances(applicationConfig.vertx().deploymentInstance());
 
         return vertx.deployVerticle(() -> new DaggerHttpServerVerticle(appComponent), deploymentOptions)
                 .onSuccess(r -> System.out.println("Verticle全部部署成功"));

@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: MIT
  */
 
-package com.yujunyang.vertx.template.common.authentication.di;
+package com.yujunyang.vertx.template.common.jwt.di;
 
 import com.yujunyang.vertx.template.common.config.ApplicationConfigProvider;
 import com.yujunyang.vertx.template.common.config.DefaultApplicationConfig;
@@ -17,18 +17,18 @@ import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import javax.inject.Singleton;
 
 @Module
-public class AuthenticationModule {
+public class JwtModule {
     @Provides
     @Singleton
     public JWTAuth provideJWTAuth(Vertx vertx, ApplicationConfigProvider applicationConfigProvider) {
         DefaultApplicationConfig config = applicationConfigProvider.getConfig();
-        JWTConfig jwtConfig = config.getJwt();
+        JWTConfig jwtConfig = config.jwt();
         JWTAuth provider = JWTAuth.create(
                 vertx,
                 new JWTAuthOptions()
                         .addPubSecKey(new PubSecKeyOptions()
-                                .setAlgorithm(jwtConfig.getAlgorithm())
-                                .setBuffer(jwtConfig.getSecret())));
+                                .setAlgorithm(jwtConfig.algorithm())
+                                .setBuffer(jwtConfig.secret())));
         return provider;
     }
 }

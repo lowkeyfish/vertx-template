@@ -5,9 +5,9 @@
 
 package com.yujunyang.vertx.template.web.di;
 
-import com.yujunyang.vertx.template.common.authentication.di.AuthenticationModule;
 import com.yujunyang.vertx.template.common.config.di.ApplicationConfigModule;
 import com.yujunyang.vertx.template.common.db.di.DatabaseModule;
+import com.yujunyang.vertx.template.common.jwt.di.JwtModule;
 import com.yujunyang.vertx.template.common.password.di.PasswordModule;
 import com.yujunyang.vertx.template.common.redis.di.RedisModule;
 import com.yujunyang.vertx.template.common.vertx.di.VertxModule;
@@ -22,7 +22,7 @@ import dagger.Module;
             RedisModule.class,
             PasswordModule.class,
             AliyunModule.class,
-            AuthenticationModule.class,
+            JwtModule.class,
             InfrastructureModule.class
         })
 public class AppModule {}

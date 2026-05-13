@@ -27,7 +27,7 @@ public class HttpServerVerticle extends VerticleBase {
         new AllRouter().appendTo(router);
         new HealthRouter().appendTo(router);
         new GraphQLRouter().appendTo(vertx, router);
-        int port = ApplicationConfigManager.get().getServer().getPort();
+        int port = ApplicationConfigManager.get().server().port();
         return vertx.createHttpServer().requestHandler(router).listen(port).onSuccess(http -> {
             LOGGER.info(DataMessage.of("Http Server启动成功", Map.of("port", port)));
         });

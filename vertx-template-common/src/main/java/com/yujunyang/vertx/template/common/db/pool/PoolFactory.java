@@ -16,11 +16,11 @@ public final class PoolFactory {
 
     public static Pool createMySQLPool(Vertx vertx, DatasourceConfig datasourceConfig) {
         MySQLConnectOptions connectOptions = new MySQLConnectOptions()
-                .setPort(datasourceConfig.getPort())
-                .setHost(datasourceConfig.getHost())
-                .setDatabase(datasourceConfig.getDatabase())
-                .setUser(datasourceConfig.getUser())
-                .setPassword(datasourceConfig.getPassword());
+                .setPort(datasourceConfig.port())
+                .setHost(datasourceConfig.host())
+                .setDatabase(datasourceConfig.database())
+                .setUser(datasourceConfig.user())
+                .setPassword(datasourceConfig.password());
         PoolOptions poolOptions =
                 new PoolOptions().setMaxSize(5).setShared(true).setName("mysql-pool");
         Pool pool = MySQLBuilder.pool()
