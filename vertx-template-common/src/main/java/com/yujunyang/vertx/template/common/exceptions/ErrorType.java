@@ -41,6 +41,7 @@ public enum ErrorType {
     REDISSON_LOCK_ERROR(500),
     ALIYUN_ERROR(500),
     DATABASE_UNIQUE_CONFLICT(500),
+    DATABASE_UPDATE_FAILED(500),
     CONFIG_ERROR(500);
 
     private int code;
