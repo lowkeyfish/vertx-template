@@ -11,17 +11,23 @@ import com.yujunyang.vertx.template.common.exceptions.SystemException;
 import com.yujunyang.vertx.template.common.utils.CheckUtils;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record JWTConfig(String secret, String algorithm) {
+public record JWTConfig(JWTConfigItem access, JWTConfigItem refresh, JWTConfigItem temp) {
 
     @Override
-    public String secret() {
-        CheckUtils.notBlank(secret, new SystemException("配置文件缺少配置项[jwt.secret]", ErrorType.CONFIG_ERROR));
-        return secret;
+    public JWTConfigItem access() {
+        CheckUtils.notNull(access, new SystemException("配置文件缺少配置项[jwt.access]", ErrorType.CONFIG_ERROR));
+        return access;
     }
 
     @Override
-    public String algorithm() {
-        CheckUtils.notBlank(algorithm, new SystemException("配置文件缺少配置项[jwt.algorithm]", ErrorType.CONFIG_ERROR));
-        return algorithm;
+    public JWTConfigItem refresh() {
+        CheckUtils.notNull(refresh, new SystemException("配置文件缺少配置项[jwt.refresh]", ErrorType.CONFIG_ERROR));
+        return refresh;
+    }
+
+    @Override
+    public JWTConfigItem temp() {
+        CheckUtils.notNull(temp, new SystemException("配置文件缺少配置项[jwt.temp]", ErrorType.CONFIG_ERROR));
+        return temp;
     }
 }
