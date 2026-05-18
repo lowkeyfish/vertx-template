@@ -10,8 +10,7 @@ import com.github.yitter.idgen.YitIdHelper;
 
 public final class IdUtils {
 
-    private IdUtils() {
-    }
+    private IdUtils() {}
 
     public static Long longId() {
         return YitIdHelper.nextId();
