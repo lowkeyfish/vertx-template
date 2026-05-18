@@ -5,14 +5,14 @@
 
 package com.yujunyang.vertx.template.web.domain.notification.sms;
 
-import com.yujunyang.vertx.template.common.domain.id.LongIdGenerator;
+import com.yujunyang.vertx.template.common.domain.id.IdUtils;
 import io.vertx.core.Future;
 import java.util.List;
 import java.util.Optional;
 
-public interface SmsRepository extends LongIdGenerator {
+public interface SmsRepository {
     default SmsId nextId() {
-        return new SmsId(nextLongId());
+        return new SmsId(IdUtils.longId());
     }
 
     Future<Void> add(Sms sms);

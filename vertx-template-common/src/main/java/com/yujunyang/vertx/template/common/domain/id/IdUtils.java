@@ -5,10 +5,19 @@
 
 package com.yujunyang.vertx.template.common.domain.id;
 
+import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
 import com.github.yitter.idgen.YitIdHelper;
 
-public interface LongIdGenerator {
-    default long nextLongId() {
+public final class IdUtils {
+
+    private IdUtils() {
+    }
+
+    public static Long longId() {
         return YitIdHelper.nextId();
+    }
+
+    public static String stringId() {
+        return NanoIdUtils.randomNanoId();
     }
 }
