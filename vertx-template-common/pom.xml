@@ -145,6 +145,11 @@
       <artifactId>alibabacloud-dysmsapi20170525</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>com.aventrix.jnanoid</groupId>
+      <artifactId>jnanoid</artifactId>
+    </dependency>
+
   </dependencies>
 
 </project>
