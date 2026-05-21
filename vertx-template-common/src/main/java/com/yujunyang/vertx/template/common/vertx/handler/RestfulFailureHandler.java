@@ -11,7 +11,6 @@ import com.yujunyang.vertx.template.common.exceptions.ErrorType;
 import com.yujunyang.vertx.template.common.exceptions.SystemException;
 import com.yujunyang.vertx.template.common.vertx.RoutingContextUtils;
 import io.vertx.core.Handler;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,14 +20,6 @@ public class RestfulFailureHandler implements Handler<RoutingContext> {
 
     @Override
     public void handle(RoutingContext routingContext) {
-        if (routingContext.statusCode() == 401) {
-            routingContext.response().setStatusCode(401);
-            routingContext.json(new JsonObject()
-                    .put("code", 401)
-                    .put("error", new Error(ErrorType.AUTHENTICATION_FAILED, "用户认证失败")));
-            return;
-        }
-
         Throwable originalFailure = routingContext.failure();
         Throwable failure = originalFailure;
         while (!(failure instanceof SystemException || failure instanceof BusinessException)
@@ -47,11 +38,15 @@ public class RestfulFailureHandler implements Handler<RoutingContext> {
 
         if (failure instanceof BusinessException) {
             BusinessException businessException = (BusinessException) failure;
-            RoutingContextUtils.responseFailure(routingContext, businessException.getError());
+            Error error = businessException.getError();
+            if (error.getCode() == 401 || error.getCode() == 403) {
+                routingContext.response().setStatusCode(error.getCode());
+            }
+            RoutingContextUtils.responseFailure(routingContext, error);
             return;
         }
 
-        RoutingContextUtils.responseFailure(routingContext, new Error(ErrorType.INTERNAL_SERVER_ERROR, "服务器内部错误"));
         LOGGER.error(failure.getMessage(), failure);
+        RoutingContextUtils.responseFailure(routingContext, new Error(ErrorType.INTERNAL_SERVER_ERROR, "服务器内部错误"));
     }
 }

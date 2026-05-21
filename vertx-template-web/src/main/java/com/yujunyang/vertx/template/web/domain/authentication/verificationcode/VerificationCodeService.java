@@ -155,7 +155,7 @@ public class VerificationCodeService {
                                     "verificationCodeRedisKey",
                                     redisKey,
                                     "verificationCodeCache",
-                                    verificationCodeCache,
+                                    StringUtils.defaultString(verificationCodeCache),
                                     "verificationCode",
                                     verificationCode)));
         });

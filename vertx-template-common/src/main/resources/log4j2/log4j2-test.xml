@@ -20,7 +20,7 @@
       <JsonTemplateLayout eventTemplateUri="classpath:log4j2/json-log-template.json"></JsonTemplateLayout>
       <Policies>
         <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
-        <SizeBasedTriggeringPolicy size="50 MB"/>
+        <SizeBasedTriggeringPolicy size="50MB"/>
       </Policies>
     </RollingFile>
     <RollingFile name="runFile"
@@ -30,7 +30,7 @@
       <JsonTemplateLayout eventTemplateUri="classpath:log4j2/json-log-template.json"></JsonTemplateLayout>
       <Policies>
         <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
-        <SizeBasedTriggeringPolicy size="50 MB"/>
+        <SizeBasedTriggeringPolicy size="50MB"/>
       </Policies>
     </RollingFile>
 

@@ -2,51 +2,62 @@ package com.yujunyang.vertx.template.common.vertx.handler;
 
 import com.yujunyang.vertx.template.common.exceptions.BusinessException;
 import com.yujunyang.vertx.template.common.exceptions.ErrorType;
+import com.yujunyang.vertx.template.common.exceptions.SystemException;
 import com.yujunyang.vertx.template.common.jwt.JWTUtils;
 import com.yujunyang.vertx.template.common.log4j2.DataMessage;
+import com.yujunyang.vertx.template.common.utils.CheckUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.Cookie;
 import io.vertx.ext.web.RoutingContext;
 import java.util.Map;
+import java.util.Set;
 import javax.crypto.SecretKey;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class JWTHandler implements Handler<RoutingContext> {
-    private static final Logger LOGGER = LogManager.getLogger(JWTHandler.class);
+public class JWTAuthHandler implements Handler<RoutingContext> {
+    private static final Logger LOGGER = LogManager.getLogger(JWTAuthHandler.class);
 
     private final SecretKey secretKey;
     private final String cookieName;
     private final boolean ignoreExpiration;
+    private Set<String> scopes;
 
     /**
      * @param secretKey jwt密钥
      * @param cookieName 可选，从 Cookie 中读取 token 的名称（不使用时传 null）
      * @param ignoreExpiration 是否忽略过期时间（true 表示过期仍视为验证通过）
      */
-    public JWTHandler(SecretKey secretKey, String cookieName, boolean ignoreExpiration) {
+    public JWTAuthHandler(SecretKey secretKey, String cookieName, boolean ignoreExpiration) {
         this.secretKey = secretKey;
         this.cookieName = cookieName;
         this.ignoreExpiration = ignoreExpiration;
     }
 
     /** 便捷构造，只从 Header 读取，不忽略过期。 */
-    public JWTHandler(SecretKey secretKey) {
+    public JWTAuthHandler(SecretKey secretKey) {
         this(secretKey, null, false);
+    }
+
+    public JWTAuthHandler withScopes(Set<String> scopes) {
+        CheckUtils.notNull(scopes, new SystemException("scopes不能为null"));
+        this.scopes = Set.copyOf(scopes);
+        return this;
     }
 
     @Override
     public void handle(RoutingContext routingContext) {
         String token = extractToken(routingContext);
         try {
-            Claims claims = JWTUtils.parseToken(token, secretKey);
+            Claims claims = JWTUtils.parseToken(token, secretKey, null, null);
+            JWTUtils.verifyScopes(claims, scopes);
             routingContext.put("jwtClaims", claims);
             routingContext.put("jwtExpired", false);
             routingContext.next();
         } catch (BusinessException e) {
-            if (e.getError().getCode() == ErrorType.AUTHENTICATION_TOKEN_EXPIRED.getCode()) {
+            if (e.getError().getType().equalsIgnoreCase(ErrorType.AUTHENTICATION_TOKEN_EXPIRED.getType())) {
                 ExpiredJwtException expiredJwtException = (ExpiredJwtException) e.getCause();
                 // token 过期
                 if (ignoreExpiration) {
