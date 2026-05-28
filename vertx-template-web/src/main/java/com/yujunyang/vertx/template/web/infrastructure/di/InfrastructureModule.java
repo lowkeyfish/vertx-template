@@ -5,9 +5,10 @@
 
 package com.yujunyang.vertx.template.web.infrastructure.di;
 
+import com.yujunyang.vertx.template.web.infrastructure.common.di.CommonModule;
 import com.yujunyang.vertx.template.web.infrastructure.event.di.EventModule;
 import com.yujunyang.vertx.template.web.infrastructure.notification.di.NotificationModule;
 import dagger.Module;
 
-@Module(includes = {EventModule.class, NotificationModule.class})
+@Module(includes = {EventModule.class, NotificationModule.class, CommonModule.class})
 public abstract class InfrastructureModule {}

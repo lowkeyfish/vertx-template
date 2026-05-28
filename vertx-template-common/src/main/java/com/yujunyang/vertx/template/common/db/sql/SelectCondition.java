@@ -6,11 +6,14 @@
 package com.yujunyang.vertx.template.common.db.sql;
 
 import io.vertx.sqlclient.Tuple;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -122,6 +125,21 @@ import java.util.stream.Collectors;
  * @see #toSql(String)
  */
 public class SelectCondition {
+    private static final String SQL_SELECT_BASE_PATTERN = """
+        SELECT {0} FROM `{1}`
+        """;
+    private static final String SQL_COUNT_BASE_PATTERN = """
+        SELECT COUNT(1) AS `count` FROM `{0}`
+        """;
+    private static final String SQL_DELETE_BASE_PATTERN = """
+        DELETE FROM `{0}`
+        """;
+    private static final String SQL_LOGIC_DELETE_BASE_PATTERN = """
+        UPDATE `{0}` SET `deleted` = UNIX_TIMESTAMP(), `update_time` = CURRENT_TIMESTAMP(), `version` = `version` + 1
+        """;
+
+    private final String tableName;
+    private final Set<String> columns;
     private final List<Filter> filters;
     private final List<Sort> sorts;
     private final Optional<Integer> offset;
@@ -132,6 +150,8 @@ public class SelectCondition {
         this.sorts = List.copyOf(b.sorts);
         this.offset = b.offset;
         this.limit = b.limit;
+        this.tableName = b.tableName;
+        this.columns = b.columns;
     }
 
     public enum Op {
@@ -167,10 +187,22 @@ public class SelectCondition {
     }
 
     public static class Builder {
+        private String tableName = "";
+        private Set<String> columns = new HashSet<>();
         private final List<Filter> filters = new ArrayList<>();
         private final List<Sort> sorts = new ArrayList<>();
         private Optional<Integer> offset = Optional.empty();
         private Optional<Integer> limit = Optional.empty();
+
+        public Builder tableName(String tableName) {
+            this.tableName = tableName;
+            return this;
+        }
+
+        public Builder columns(Set<String> columns) {
+            this.columns = new HashSet<>(columns);
+            return this;
+        }
 
         public Builder filter(String field, Object value, Op op) {
             filters.add(new AtomicFilter(field, value, op));
@@ -277,6 +309,25 @@ public class SelectCondition {
         });
 
         return new SqlBuildResult(sql.toString(), Tuple.from(params));
+    }
+
+    public SqlBuildResult toSelectSql() {
+        return toSql(MessageFormat.format(
+                SQL_SELECT_BASE_PATTERN,
+                String.join(", ", columns.stream().map(n -> "`" + n + "`").toList()),
+                tableName));
+    }
+
+    public SqlBuildResult toCountSql() {
+        return toSql(MessageFormat.format(SQL_COUNT_BASE_PATTERN, tableName));
+    }
+
+    public SqlBuildResult toDeleteSql() {
+        return toSql(MessageFormat.format(SQL_DELETE_BASE_PATTERN, tableName));
+    }
+
+    public SqlBuildResult toLogicDeleteSql() {
+        return toSql(MessageFormat.format(SQL_LOGIC_DELETE_BASE_PATTERN, tableName));
     }
 
     private static String operatorToSql(SelectCondition.Op op) {
